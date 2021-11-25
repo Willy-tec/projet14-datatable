@@ -1,0 +1,63 @@
+.DataTable-length {
+  display: flex;
+  justify-content: space-between;
+}
+
+.result_div {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.7rem;
+}
+.result_div_span {
+  display: grid;
+  grid-template-columns: 1fr 42px 42px 42px 42px 42px 42px 42px;
+  place-items: center;
+  gap: 3px;
+  width: auto;
+}
+.result_div_span button {
+  width: 40px;
+  padding: 5px 0;
+}
+
+table {
+  max-width: 890px;
+  min-width: 100px;
+  width: 100%;
+  text-align: center;
+  border-spacing: 0px 0px;
+  border-bottom: 1px solid #111111;
+}
+table thead th {
+  border-bottom: 1px solid #111111;
+  padding: 8px 10px;
+}
+table tbody tr:nth-child(2n+1) {
+  background-color: #f9f9f9;
+}
+table tbody tr td {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 10px;
+}
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+#submit {
+  float: right;
+  padding: 8px 10px;
+}
+
+.sorting {
+  cursor: pointer;
+  padding: 10px 18px;
+  background-repeat: no-repeat;
+  background-position: center right;
+  background-image: url("./png/sort_both.png");
+}
+.sorting.asc {
+  background-image: url("./png/sort_asc.png");
+}
+.sorting.desc {
+  background-image: url("./png/sort_desc.png");
+}/*# sourceMappingURL=style.css.map */
