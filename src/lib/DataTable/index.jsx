@@ -7,7 +7,6 @@ function DataTable({ id, className, data, columns }) {
     const [pageIndex, setPageIndex] = useState(1);
     let nbPage = Math.ceil(dataFilter?.length / tableLength);
     if (pageIndex > nbPage) setPageIndex(nbPage);
-    useEffect(() => console.log('test render'), [pageIndex]);
     function handleSelectChange() {
         let len = document.querySelector('#DataTable-length-select').value;
         setTableLength(+len);
