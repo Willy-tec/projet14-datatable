@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './style.css';
 function DataTable({ id, className, data, columns }) {
     const [tableLength, setTableLength] = useState(10);
@@ -197,3 +196,5 @@ function DataTable({ id, className, data, columns }) {
 }
 
 export default DataTable;
+// TODO Découpage en plusieurs composants
+// TODO Remettre en place les states et props comme il faut
