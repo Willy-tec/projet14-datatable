@@ -7,14 +7,15 @@ import './style.css';
 function DataTable({ id, className, data, columns }) {
     const [filterText, setFilterText] = useState('');
     const [tableLength, setTableLength] = useState(10);
-    const [dataFilter, setDataFilter] = useState(data);
     const [pageIndex, setPageIndex] = useState(1);
-    //const [isFiltered, setIsFiltered] = useState(false);
-    let nbPage = Math.ceil(dataFilter?.length / tableLength);
+    const [sortingObject, setSortingObject] = useState({
+        order: null,
+        column: null,
+    });
+    const nbPage = Math.ceil(data?.length / tableLength);
     if (pageIndex > nbPage) setPageIndex(nbPage);
 
-    // Fonction pour filtrer le contenu du tableau. On "memoize" les valeurs pour ne pas recalculer systematiquement.
-    const memoized = useMemo(() => filterData(), [filterText]);
+    let dataArray = filterData();
     function filterData() {
         let regex = new RegExp(filterText, 'i');
         return data.filter((el) => {
@@ -26,6 +27,48 @@ function DataTable({ id, className, data, columns }) {
         });
     }
 
+    if (sortingObject.order && sortingObject.column) sorting(sortingObject);
+    function sorting({ order, column }) {
+        const asc = (a, b) => (a > b ? 1 : -1);
+        const desc = (a, b) => (a < b ? 1 : -1);
+        if (dataArray.length == 0) return;
+        let isNumber = isNaN(Number(dataArray[0][column])) ? false : true;
+        let isDate = !!(
+            !isNumber && dataArray[0][column].match(/[0-9]+\/[0-9]+\/[0-9]+/g)
+        );
+        const dateCompare = (a, b) => {
+            let aArr = a.split('/');
+            let bArr = b.split('/');
+            if (aArr[2] > bArr[2]) return 1;
+            else if (aArr[2] < bArr[2]) return -1;
+            else if (aArr[1] > bArr[1]) return 1;
+            else if (aArr[1] < bArr[1]) return -1;
+            else if (aArr[0] > bArr[0]) return 1;
+            else if (aArr[0] < bArr[0]) return -1;
+        };
+        const dateCompareDesc = (a, b) => {
+            let aArr = a.split('/');
+            let bArr = b.split('/');
+            if (aArr[2] < bArr[2]) return 1;
+            else if (aArr[2] > bArr[2]) return -1;
+            else if (aArr[1] < bArr[1]) return 1;
+            else if (aArr[1] > bArr[1]) return -1;
+            else if (aArr[0] < bArr[0]) return 1;
+            else if (aArr[0] > bArr[0]) return -1;
+        };
+
+        let fnCompare = order === 'asc' ? asc : desc;
+
+        dataArray.sort((a, b) => {
+            if (isDate)
+                return order == 'asc'
+                    ? dateCompare(a[column], b[column])
+                    : dateCompareDesc(a[column], b[column]);
+            else if (isNumber)
+                return fnCompare(Number(a[column]), Number(b[column]));
+            else return fnCompare(a[column], b[column]);
+        });
+    }
     return (
         <section id="DataTable">
             <div className="DataTable-length">
@@ -37,16 +80,17 @@ function DataTable({ id, className, data, columns }) {
             </div>
             <MainTable
                 title="okTitle"
-                data={memoized}
+                data={dataArray}
                 columns={columns}
                 currentPage={pageIndex}
                 tableLength={tableLength}
+                setSortingObject={setSortingObject}
             />
             <PaginationNavigation
                 pageIndex={pageIndex}
                 setPageIndex={setPageIndex}
                 tableLength={tableLength}
-                dataLength={memoized.length}
+                dataLength={dataArray.length}
             />
         </section>
     );
