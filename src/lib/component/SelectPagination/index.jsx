@@ -1,4 +1,6 @@
 import './style.css';
+import React from 'react';
+
 function SelectPagination({ setTableLength }) {
     function handleSelectChange({ target }) {
         setTableLength(target.value);

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React from 'react';
 import './style.css';
 function SearchInput({ filterText, setFilterText }) {
     function handleChangeSearch({ target }) {

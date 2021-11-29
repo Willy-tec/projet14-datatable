@@ -8,7 +8,7 @@ Object.defineProperty(exports, "__esModule", {
 Object.defineProperty(exports, "DataTable", {
   enumerable: true,
   get: function get() {
-    return _DataTable["default"];
+    return _DataTable.default;
   }
 });
 
