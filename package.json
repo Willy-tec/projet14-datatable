@@ -10,8 +10,9 @@
         "type": "git",
         "url": "https://github.com/Willy-tec"
     },
-    "version": "0.1.3",
+    "version": "0.1.5",
     "scripts": {
+        "start": "react-scripts start",
         "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__"
     },
     "devDependencies": {
@@ -26,5 +27,17 @@
     "peerDependencies": {
         "react": "^17.0.2",
         "react-dom": "^17.0.2"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
     }
 }
