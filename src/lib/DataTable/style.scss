@@ -21,7 +21,7 @@
 }
 
 table {
-    max-width: 890px;
+    max-width: 1024px;
     min-width: 100px;
     width: 100%;
     text-align: center;
@@ -66,5 +66,27 @@ table {
     }
     &.desc {
         background-image: url('./png/sort_desc.png');
+    }
+}
+.PaginationNavigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    & button {
+        padding: 0.1rem 0.3rem;
+        margin: 0.2rem;
+        cursor: pointer;
+        &.iterableButton {
+            border: none;
+            background-color: white;
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+                border-radius: 0.2rem;
+            }
+            &:hover:disabled {
+                background-color: white;
+                cursor: not-allowed;
+            }
+        }
     }
 }

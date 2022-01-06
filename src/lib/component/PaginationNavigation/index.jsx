@@ -16,7 +16,7 @@ function PaginationNavigation({
         const MAX_BUTTON = 7;
         let shouldWeDot = NB_PAGE > MAX_BUTTON;
         let arr = [];
-        arr.push('PREVIOUS');
+        arr.push('Previous');
         if (shouldWeDot) {
             let dotAtStart = currentPos > NB_PAGE - 4,
                 dotAtEnd = currentPos <= 4;
@@ -46,7 +46,7 @@ function PaginationNavigation({
                 arr.push(i);
             }
         }
-        arr.push('NEXT');
+        arr.push('Next');
 
         return arr;
     }
@@ -54,11 +54,11 @@ function PaginationNavigation({
         setPageIndex(target.dataset.dtIdx);
     }
     function handlePrevious({ target }) {
-        const page = pageIndex > 1 ? pageIndex - 1 : 1;
+        const page = pageIndex > 1 ? +pageIndex - 1 : 1;
         setPageIndex(page);
     }
     function handleNext({ target }) {
-        const page = pageIndex < NB_PAGE ? pageIndex + 1 : NB_PAGE;
+        const page = pageIndex < NB_PAGE ? +pageIndex + 1 : NB_PAGE;
         setPageIndex(page);
     }
     return (
@@ -80,20 +80,24 @@ function PaginationNavigation({
                     switch (el) {
                         case '...':
                             return <span key={`link${index}`}> ... </span>;
-                        case 'NEXT':
+                        case 'Next':
                             return (
                                 <button
+                                    disabled={pageIndex >= NB_PAGE}
                                     key={`link${index}`}
                                     onClick={handleNext}
+                                    className="iterableButton"
                                 >
                                     {el}
                                 </button>
                             );
-                        case 'PREVIOUS':
+                        case 'Previous':
                             return (
                                 <button
+                                    disabled={pageIndex <= 1}
                                     key={`link${index}`}
                                     onClick={handlePrevious}
+                                    className="iterableButton"
                                 >
                                     {el}
                                 </button>

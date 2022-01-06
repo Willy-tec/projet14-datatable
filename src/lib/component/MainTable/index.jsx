@@ -34,7 +34,6 @@ function MainTable({
 
     return (
         <table id={id ? id : null} className={className ? className : null}>
-            <caption>{title}</caption>
             <thead>
                 <tr onClick={handleSortingColumn}>
                     {columns?.map((el, index) => (
