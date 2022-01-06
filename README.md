@@ -1,13 +1,12 @@
-Projet14 from open class room.
+# Projet14 from open class room.
 
-Convert the jquery datatable plugin to a react component.
-
-Instruction coming soon
+## Convert the jquery datatable plugin to a react component.
 
 you should be able to use the plugin by following this example :
 in react component :
 
-```<DataTable
+```
+    <DataTable
         data={employeList}
         columns={[
             { title: 'First Name', data: 'firstName' },
