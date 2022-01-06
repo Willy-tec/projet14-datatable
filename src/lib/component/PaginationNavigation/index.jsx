@@ -116,3 +116,4 @@ function PaginationNavigation({
 }
 
 export default PaginationNavigation;
+// TODO désactiver les boutons next/previous
